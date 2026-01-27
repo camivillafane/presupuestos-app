@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Presupuestos App</title>
+</head>
+<body>
+    <main>
+        <header>Presupuestos App</header>
+        <section class="section">
+            <h2>Datos del Cliente</h2>
+            <div class="grid">
+                <div class="field">
+                    <label>Nombre</label><input type="text" id="cliente-nombre">
+                </div>
+                <div class="field">
+                    <label>Email</label><input type="email" id="cliente-email">
+                </div>
+                <div class="field">
+                    <label>Teléfono</label><input type="tel" id="cliente-telefono">
+                </div>
+                <div class="field">
+                    <label>Direccion</label><input type="text" id="cliente-direccion">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Servicios</h2>
+
+            <table id="tabla-servicios">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="fila-servicio">
+                    <td><input type="text" class="servicio-descripcion" placeholder="Descripcion del servicio"></td>
+                    <td><input type="number" class="servicio-precio" placeholder="0" min="0" step="0.01
+                        "></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" id="btn-agregar-servicio">Agregar Servicio</button>
+        </section>
+
+        <section class="section total">
+            <div class="total-final">
+                <span>Total</span>
+                <span id="total">$0.00</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="field">
+                <label>Presupuesto válido hasta</label>
+                <input type="date" id="fecha-validez">
+            </div>
+        </section>
+
+        <section class="section action">
+            <button type="button" id="btn-generar-pdf">
+                Generar PDF
+            </button>
+        </section>
+    </main>
+
+    <div id="pdf" style="display:none">
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
