@@ -241,7 +241,3 @@ button:active {
         gap: var(--espaciado-md);
     }
 }
-
-#pdf {
-    display: none !important;
-}

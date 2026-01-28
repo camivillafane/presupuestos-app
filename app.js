@@ -79,8 +79,15 @@ btnGenerarPDF.addEventListener("click", () => {
     });
 
     pdfContainer.innerHTML = `
-        <div style="font-family: Arial; padding: 20px;">
-            <h1>Presupuesto</h1>
+        <div style="font-family: Arial; color:#000;">
+            <div style="text-align: left; margin-bottom: 12px;">
+                <strong>PILAR GOMEZ. Servicio de Pinturas</strong><br>
+                Julio C. Gómez<br>
+                Cel: 3454 12 5296<br>
+                Correo: julioc.gomez@hotmail.com
+            </div>
+
+            <h1 style="margin-top:16px;">Presupuesto</h1>
 
             <h3>Datos del Cliente</h3>
             <p><strong>Nombre:</strong> ${nombre}</p>
@@ -106,18 +113,29 @@ btnGenerarPDF.addEventListener("click", () => {
         </div>
     `;
 
-    pdfContainer.style.display = "block";
+    pdfContainer.style.setProperty('display', 'block', 'important');
+    pdfContainer.style.setProperty('width', '210mm', 'important');
+    pdfContainer.style.setProperty('background', '#ffffff', 'important');
+    pdfContainer.style.setProperty('box-sizing', 'border-box', 'important');
+    pdfContainer.style.setProperty('padding', '20px', 'important');
+    pdfContainer.style.setProperty('overflow', 'visible', 'important');
 
     html2pdf()
         .from(pdfContainer)
         .set({
             margin: 10,
             filename: "presupuesto.pdf",
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            pagebreak: { mode: ['css', 'legacy'] }
         })
         .save()
         .then(() => {
-            pdfContainer.style.display = "none";
+            pdfContainer.style.setProperty('display', 'none', 'important');
+            pdfContainer.style.removeProperty('width');
+            pdfContainer.style.removeProperty('background');
+            pdfContainer.style.removeProperty('box-sizing');
+            pdfContainer.style.removeProperty('padding');
+            pdfContainer.style.removeProperty('overflow');
         });
 });
