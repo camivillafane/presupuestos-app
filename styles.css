@@ -99,43 +99,28 @@ header {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+#lista-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-sm);
     margin-bottom: var(--espaciado-md);
 }
 
-table thead {
-    background-color: var(--color-fondo);
-    border-bottom: 2px solid var(--color-borde);
+.servicio-item {
+    display: flex;
+    gap: var(--espaciado-sm);
+    align-items: center;
 }
 
-table th {
-    padding: var(--espaciado-md);
-    text-align: left;
-    font-weight: 600;
-    color: var(--color-texto);
-    font-size: var(--font-size-sm);
-}
-
-table td {
-    padding: var(--espaciado-md);
-    border-bottom: 1px solid var(--color-borde);
-}
-
-table tbody tr:hover {
-    background-color: var(--color-fondo);
-}
-
-table input {
-    width: 100%;
+.servicio-item input {
+    flex: 1;
     padding: var(--espaciado-sm) var(--espaciado-md);
     border: 1px solid var(--color-borde);
     border-radius: 0.375rem;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
 }
 
-table input:focus {
+.servicio-item input:focus {
     outline: none;
     border-color: var(--color-principal);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -162,14 +147,14 @@ button:active {
     transform: scale(0.98);
 }
 
-.btn-eliminar {
+.btn-eliminar-servicio {
     padding: var(--espaciado-xs) var(--espaciado-sm);
     background-color: var(--color-error);
     font-size: var(--font-size-sm);
-    width: 100%;
+    min-width: 40px;
 }
 
-.btn-eliminar:hover {
+.btn-eliminar-servicio:hover {
     background-color: #b91c1c;
 }
 
@@ -177,7 +162,6 @@ button:active {
     width: 100%;
     padding: var(--espaciado-md) var(--espaciado-lg);
     background-color: var(--color-exito);
-    margin-top: var(--espaciado-md);
 }
 
 #btn-agregar-servicio:hover {
@@ -192,9 +176,28 @@ button:active {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--color-texto);
+    gap: var(--espaciado-md);
+}
+
+.total-final label {
     font-size: 1.25rem;
     font-weight: 700;
+}
+
+.total-final input {
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: var(--espaciado-sm) var(--espaciado-md);
+    border: 2px solid var(--color-principal);
+    border-radius: 0.375rem;
+    width: 200px;
+    text-align: right;
+}
+
+.total-final input:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .action {
@@ -227,17 +230,12 @@ button:active {
         grid-template-columns: 1fr;
     }
     
-    table {
-        font-size: var(--font-size-sm);
-    }
-    
-    table th,
-    table td {
-        padding: var(--espaciado-sm);
-    }
-    
     .total-final {
         flex-direction: column;
-        gap: var(--espaciado-md);
+        align-items: flex-start;
+    }
+    
+    .total-final input {
+        width: 100%;
     }
 }
