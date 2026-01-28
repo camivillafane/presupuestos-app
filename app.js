@@ -63,7 +63,16 @@ btnGenerarPDF.addEventListener("click", () => {
     const email = document.getElementById("cliente-email").value;
     const telefono = document.getElementById("cliente-telefono").value;
     const direccion = document.getElementById("cliente-direccion").value;
-    const fechaValidez = document.getElementById("fecha-validez").value;
+    const fechaValidezInput = document.getElementById("fecha-validez").value;
+
+    let fechaFormato = "-";
+    if (fechaValidezInput) {
+        const fecha = new Date(fechaValidezInput);
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+        const anio = fecha.getFullYear();
+        fechaFormato = `${dia}-${mes}-${anio}`;
+    }
 
     let filasServicios = "";
     tbody.querySelectorAll("tr").forEach((fila) => {
@@ -72,70 +81,92 @@ btnGenerarPDF.addEventListener("click", () => {
 
         filasServicios += `
             <tr>
-                <td>${descrip}</td>
-                <td>$${parseFloat(precio).toFixed(2)}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">${descrip}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; text-align: right;">$${parseFloat(precio).toFixed(2)}</td>
             </tr>
         `;
     });
 
     pdfContainer.innerHTML = `
-        <div style="font-family: Arial; color:#000;">
-            <div style="text-align: left; margin-bottom: 12px;">
-                <strong>PILAR GOMEZ. Servicio de Pinturas</strong><br>
-                Julio C. Gómez<br>
-                Cel: 3454 12 5296<br>
-                Correo: julioc.gomez@hotmail.com
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #000; background: #ffffff; padding: 40px; line-height: 1.6;">
+            
+            <div style="border-bottom: 3px solid #000; padding-bottom: 20px; margin-bottom: 20px;">
+                <h2 style="margin: 0 0 10px 0; font-size: 24px; font-weight: 600;">PILAR GOMEZ</h2>
+                <p style="margin: 5px 0; font-size: 14px; color: #555;">Servicio de Pinturas</p>
+                <p style="margin: 5px 0; font-size: 12px; color: #777;">Julio C. Gómez | Cel: 3454 12 5296 | julioc.gomez@hotmail.com</p>
             </div>
 
-            <h1 style="margin-top:16px;">Presupuesto</h1>
+            <h1 style="text-align: center; font-size: 32px; margin: 0 0 30px 0; font-weight: 700;">Presupuesto</h1>
 
-            <h3>Datos del Cliente</h3>
-            <p><strong>Nombre:</strong> ${nombre}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Teléfono:</strong> ${telefono}</p>
-            <p><strong>Dirección:</strong> ${direccion}</p>
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 15px; background: #fafafa;">
+                <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600; text-transform: uppercase; color: #333;">Datos del Cliente</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <p style="margin: 0 0 6px 0; font-size: 12px; color: #777; font-weight: 500;">NOMBRE</p>
+                        <p style="margin: 0; font-size: 14px; color: #000; font-weight: 500;">${nombre || '-'}</p>
+                    </div>
+                    <div>
+                        <p style="margin: 0 0 6px 0; font-size: 12px; color: #777; font-weight: 500;">EMAIL</p>
+                        <p style="margin: 0; font-size: 14px; color: #000; font-weight: 500;">${email || '-'}</p>
+                    </div>
+                    <div>
+                        <p style="margin: 0 0 6px 0; font-size: 12px; color: #777; font-weight: 500;">TELÉFONO</p>
+                        <p style="margin: 0; font-size: 14px; color: #000; font-weight: 500;">${telefono || '-'}</p>
+                    </div>
+                    <div>
+                        <p style="margin: 0 0 6px 0; font-size: 12px; color: #777; font-weight: 500;">DIRECCIÓN</p>
+                        <p style="margin: 0; font-size: 14px; color: #000; font-weight: 500;">${direccion || '-'}</p>
+                    </div>
+                </div>
+            </div>
 
-            <h3>Servicios</h3>
-            <table width="100%" border="1" cellspacing="0" cellpadding="7">
-                <thead>
-                    <tr>
-                        <th>Servicio</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${filasServicios}
-                </tbody>
-            </table>
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 15px; background: #fafafa;">
+                <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600; text-transform: uppercase; color: #333;">Servicios</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #000;">
+                            <th style="padding: 10px; text-align: left; font-weight: 600; font-size: 13px; color: #000;">Descripción</th>
+                            <th style="padding: 10px; text-align: right; font-weight: 600; font-size: 13px; color: #000;">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${filasServicios}
+                    </tbody>
+                </table>
+            </div>
 
-            <h2>Total: ${totalSpan.textContent}</h2>
-            <p><strong>Presupuesto válido hasta:</strong> ${fechaValidez}</p>
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 15px; background: #fafafa;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0; font-size: 18px; font-weight: 600;">Total a pagar</h2>
+                    <h2 style="margin: 0; font-size: 28px; font-weight: 700; color: #000;">${totalSpan.textContent}</h2>
+                </div>
+            </div>
+
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background: #fafafa;">
+                <p style="margin: 0; font-size: 12px; color: #777; font-weight: 500;">PRESUPUESTO VÁLIDO HASTA</p>
+                <p style="margin: 6px 0 0 0; font-size: 16px; color: #000; font-weight: 600;">${fechaFormato}</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #999;">
+                <p style="margin: 0;">Documento generado automáticamente | PILAR GOMEZ Servicios de Pintura</p>
+            </div>
         </div>
     `;
 
     pdfContainer.style.setProperty('display', 'block', 'important');
-    pdfContainer.style.setProperty('width', '210mm', 'important');
     pdfContainer.style.setProperty('background', '#ffffff', 'important');
-    pdfContainer.style.setProperty('box-sizing', 'border-box', 'important');
-    pdfContainer.style.setProperty('padding', '20px', 'important');
-    pdfContainer.style.setProperty('overflow', 'visible', 'important');
 
     html2pdf()
         .from(pdfContainer)
         .set({
-            margin: 10,
+            margin: [10, 10, 10, 10],
             filename: "presupuesto.pdf",
-            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowHeight: 1400 },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-            pagebreak: { mode: ['css', 'legacy'] }
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         })
         .save()
         .then(() => {
             pdfContainer.style.setProperty('display', 'none', 'important');
-            pdfContainer.style.removeProperty('width');
-            pdfContainer.style.removeProperty('background');
-            pdfContainer.style.removeProperty('box-sizing');
-            pdfContainer.style.removeProperty('padding');
-            pdfContainer.style.removeProperty('overflow');
         });
 });
