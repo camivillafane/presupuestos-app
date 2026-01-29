@@ -42,7 +42,7 @@ btnGenerarPDF.addEventListener("click", () => {
     const direccion = document.getElementById("cliente-direccion").value;
     const fechaActual = document.getElementById("fecha-actual").value;
     const fechaValidezInput = document.getElementById("fecha-validez").value;
-    const totalValor = document.getElementById("total-input").value || "0";
+    const totalValor = Number(document.getElementById("total-input").value) || "0";
 
     let fechaActualFormato = "-";
     if (fechaActual) {
@@ -115,7 +115,7 @@ btnGenerarPDF.addEventListener("click", () => {
             <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; margin-bottom: 10px; background: #fafafa;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h2 style="margin: 0; font-size: 16px; font-weight: 600;">Total a pagar</h2>
-                    <h2 style="margin: 0; font-size: 24px; font-weight: 700; color: #000;">$${parseFloat(totalValor).toFixed(2)}</h2>
+                    <h2 style="margin: 0; font-size: 24px; font-weight: 700; color: #000;">$${totalValor.toLocaleString("es-AR")}</h2>
                 </div>
             </div>
 
