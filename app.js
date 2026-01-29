@@ -73,7 +73,7 @@ btnGenerarPDF.addEventListener("click", () => {
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #000; background: #ffffff; padding: 20px; line-height: 1.6;">
             
             <div style="border-bottom: 3px solid #000; padding-bottom: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
-                <img src="logo.png" alt="Logo" style="width: 60px; height: 60px; object-fit: contain;">
+                <img src="./img/logo.png" alt="Logo" style="width: 60px; height: 60px; object-fit: contain;">
                 <div>
                     <h2 style="margin: 0 0 3px 0; font-size: 20px; font-weight: 600;">PILAR GOMEZ</h2>
                     <p style="margin: 2px 0; font-size: 12px; color: #555;">Servicio de Pinturas</p>
